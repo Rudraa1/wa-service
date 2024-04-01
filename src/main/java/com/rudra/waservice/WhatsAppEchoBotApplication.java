@@ -1,7 +1,5 @@
-package com.rudra.test;//package com.rudra.wamsgapp;
+package com.rudra.waservice;//package com.rudra.wamsgapp;
 
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,16 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import java.io.IOException;
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @SpringBootApplication
 public class WhatsAppEchoBotApplication {

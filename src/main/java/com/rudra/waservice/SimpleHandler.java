@@ -1,11 +1,9 @@
-package com.rudra.test;
+package com.rudra.waservice;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
