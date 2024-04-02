@@ -30,8 +30,8 @@ class WebhookController {
     private final String verifyToken;
 
     public WebhookController() {
-        this.token = System.getenv("WHATSAPP_TOKEN");
-        this.verifyToken = System.getenv("VERIFY_TOKEN");
+        this.token = "EABqnt4XHD7YBO1LwqpMihcaeXVdOtSzVnbueaxaJQZClsxbSBQ4yMa7nnOYv7mZBOF6vb6r7kRZCAYXZC5HwSsSnIsJursnlsZBdpZBMqZABC9jdiZB10X45tWn8tQWspRppQZAiPJpDtuT4cNQnvL3RSqXisx3ZAYB9TImeKsnmQpHBZBWigfZCnkXHz8qFsZBZBBruTR32oKaJprRGySHBovzYNOHEMzGZBn3nPisscjHjwZDZD";
+        this.verifyToken = "RUDRA";
     }
 
     @PostMapping("/webhook")
@@ -54,8 +54,10 @@ class WebhookController {
                 sendMessage(phoneNumberId, from, "Ack: " + msgBody);
             }
 
-            String requestBodyString = requestBody.toString();
-            return ResponseEntity.ok(requestBodyString);
+//            String requestBodyString = requestBody.toString();
+//            return ResponseEntity.ok(requestBodyString);
+            return ResponseEntity.ok().build();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,12 +66,12 @@ class WebhookController {
     }
 
 
-    @RequestMapping("/webhook")
-    public ResponseEntity<String> verifyWebhook(@RequestParam String hubMode,
-                                                @RequestParam String hubVerifyToken,
-                                                @RequestParam String hubChallenge) {
+    @GetMapping("/webhook")
+    public ResponseEntity<String> verifyWebhook(@RequestParam("hubMode") String hubMode,
+                                                @RequestParam("hubVerifyToken") String hubVerifyToken,
+                                                @RequestParam("hubChallenge") String hubChallenge) {
         if ("subscribe".equals(hubMode) && verifyToken.equals(hubVerifyToken)) {
-            System.out.println("WEBHOOK_VERIFIED");
+            System.out.println("WEBHOOK_VERIFIED" );
             return ResponseEntity.ok(hubChallenge);
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -78,7 +80,7 @@ class WebhookController {
 
     @GetMapping("/{name}")
     public String getName(@PathVariable("name") String name){
-        return  "Hello there " + name;
+        return  "Hello there " + name + token;
     }
 
     private void sendMessage(String phoneNumberId, String to, String text) {
