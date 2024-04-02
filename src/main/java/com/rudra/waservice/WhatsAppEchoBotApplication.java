@@ -3,6 +3,7 @@ package com.rudra.waservice;//package com.rudra.wamsgapp;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Map;
 
 @SpringBootApplication
 public class WhatsAppEchoBotApplication {
@@ -66,15 +68,35 @@ class WebhookController {
     }
 
 
+
+//    public ResponseEntity<String> verifyWebhook( String hubMode,
+//                                                 String hubVerifyToken,
+//                                                 String hubChallenge) {
+//        if ("subscribe".equals(hubMode) && verifyToken.equals(hubVerifyToken)) {
+//            System.out.println("WEBHOOK_VERIFIED" );
+//            return ResponseEntity.ok(hubChallenge);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//        }
+//    }
+
     @GetMapping("/webhook")
-    public ResponseEntity<String> verifyWebhook( String hubMode,
-                                                 String hubVerifyToken,
-                                                 String hubChallenge) {
-        if ("subscribe".equals(hubMode) && verifyToken.equals(hubVerifyToken)) {
-            System.out.println("WEBHOOK_VERIFIED" );
-            return ResponseEntity.ok(hubChallenge);
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public void handleWebhook(Map<String, String> queryParams, HttpServletResponse response) {
+        String mode = queryParams.get("hub.mode");
+        String challenge = queryParams.get("hub.challenge");
+        String token = queryParams.get("hub.verify_token");
+
+        if (mode != null && token != null) {
+            if (mode.equals("subscribe") && token.equals(verifyToken)) {
+                response.setStatus(200);
+                try {
+                    response.getWriter().print(challenge);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                response.setStatus(403);
+            }
         }
     }
 
