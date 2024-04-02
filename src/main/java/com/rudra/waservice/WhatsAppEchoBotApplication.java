@@ -30,8 +30,8 @@ class WebhookController {
     private final String verifyToken;
 
     public WebhookController() {
-        this.token = "EABqnt4XHD7YBO1LwqpMihcaeXVdOtSzVnbueaxaJQZClsxbSBQ4yMa7nnOYv7mZBOF6vb6r7kRZCAYXZC5HwSsSnIsJursnlsZBdpZBMqZABC9jdiZB10X45tWn8tQWspRppQZAiPJpDtuT4cNQnvL3RSqXisx3ZAYB9TImeKsnmQpHBZBWigfZCnkXHz8qFsZBZBBruTR32oKaJprRGySHBovzYNOHEMzGZBn3nPisscjHjwZDZD";
-        this.verifyToken = "RUDRA";
+        this.token = System.getenv("WHATSAPP_TOKEN");
+        this.verifyToken = System.getenv("VERIFY_TOKEN");
     }
 
     @PostMapping("/webhook")
