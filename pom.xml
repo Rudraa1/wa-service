@@ -54,13 +54,29 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<!-- Configure the compiler to use Java 11 -->
-					<source>11</source>
-					<target>11</target>
-					<!-- End of Java 11 configuration -->
+					<toolchains>
+						<jdk>
+							<version>11</version>
+							<vendor>openjdk</vendor>
+							<installation>
+								<!-- Provide the path to your JDK 11 installation directory -->
+								<type>jdk</type>
+								<configuration>
+									<jdkHome>C:\Program Files\Java\jdk-11</jdkHome>
+								</configuration>
+							</installation>
+						</jdk>
+					</toolchains>
 				</configuration>
 			</plugin>
 
