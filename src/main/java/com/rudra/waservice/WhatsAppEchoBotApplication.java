@@ -67,9 +67,9 @@ class WebhookController {
 
 
     @GetMapping("/webhook")
-    public ResponseEntity<String> verifyWebhook(@RequestParam("hubMode") String hubMode,
-                                                @RequestParam("hubVerifyToken") String hubVerifyToken,
-                                                @RequestParam("hubChallenge") String hubChallenge) {
+    public ResponseEntity<String> verifyWebhook( String hubMode,
+                                                 String hubVerifyToken,
+                                                 String hubChallenge) {
         if ("subscribe".equals(hubMode) && verifyToken.equals(hubVerifyToken)) {
             System.out.println("WEBHOOK_VERIFIED" );
             return ResponseEntity.ok(hubChallenge);
